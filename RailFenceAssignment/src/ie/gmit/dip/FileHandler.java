@@ -13,9 +13,6 @@ public class FileHandler {
 	//BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(new File("./in.txt"))));
 	//String line = null
 }
-
-
-
 	//need to put in a method to input file name into reader fnam
 	
 	/*while ((line = br.readLine()) != null); {

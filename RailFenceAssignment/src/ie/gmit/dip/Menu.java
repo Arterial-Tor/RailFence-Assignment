@@ -7,6 +7,8 @@ public class Menu {
 	private Scanner s;
 	private boolean keepRunning = true; //Keeps the menu visible until user decides to close application
 	private KeyHandler keyHolder; // Creates variable keyHolder as an object of the keyHandler class
+	private InputHandler userText; // Creates variable userText as an object of the InputHanlder class
+	
 	
 	public Menu() { // constructor to initialise s
 		s = new Scanner(System.in); // Initialises new scanner as which can be called throughout the menu
@@ -20,19 +22,29 @@ public class Menu {
 
 			switch (userchoice) {
 			case 1 -> selectFile();
-			case 2 -> enterKey();
-			case 3 -> encrypt();
-			case 4 -> decrypt();
-			case 5 -> displayRailFence();
-			case 6 -> quit();
+			case 2 -> textInput();
+			case 3 -> enterKey();
+			case 4 -> encrypt();
+			case 5 -> decrypt();
+			case 6 -> displayRailFence();
+			case 7 -> quit();
 			default -> System.out.println("[ERROR] Invalid Input!");
-			//default ensure any value outside 1-6 is displayed to the user as invalid
+			//default ensure any value outside 1-7 is displayed to the user as invalid
 			}
 		}
 	}
 
+	private void textInput() { //takes text directly from user for encryption
+			System.out.println("Enter the plaintext for encryption");
+			Scanner inn = new Scanner(System.in);
+			userText = inn.next();
+		return;
+	}
+
 	private void selectFile() {
 		System.out.println("Choose File or URL");
+		System.out.println("Enter the plaintext for encryption");
+		Scanner fname = new Scanner(System.in);
 		//BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(new File(s.next()))));
 	
 		//String plainText = s.next(System.in);
@@ -42,6 +54,8 @@ public class Menu {
 
 	private void displayRailFence() {
 		System.out.println("railfence displayed");
+		//printArray();
+		
 		return;
 	}
 
@@ -65,7 +79,9 @@ public class Menu {
 
 		System.out.println("******** Please Enter RailFence Offset! ********");
 		keyHolder.setOffset(Integer.parseInt(s.next()));
-
+		
+		//call validateKey()
+		
 		return;
 	}
 
@@ -80,12 +96,13 @@ public class Menu {
 		System.out.println("       File Encyrption App v1.0");
 		System.out.println("######################################");
 		System.out.println("1) Select File or URL");
-		System.out.println("2) Enter RailFence Key");
-		System.out.println("3) Encrypt");
-		System.out.println("4) Decrypt");
-		System.out.println("5) Display RailFence");
-		System.out.println("6) Quit");
-		System.out.println("Select an Option [1 - 5]>");
+		System.out.println("2) Input Plain Text");
+		System.out.println("3) Enter RailFence Key");
+		System.out.println("4) Encrypt");
+		System.out.println("5) Decrypt");
+		System.out.println("6) Display RailFence");
+		System.out.println("7) Quit");
+		System.out.println("Select an Option [1 - 7]>");
 
 	}
 }

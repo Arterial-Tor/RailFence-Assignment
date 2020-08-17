@@ -4,29 +4,48 @@ public class RailFence {
 	private char[][] matrix = null;
 	private int offset;
 
+
 	private RailFence(int key, int offset, int col) {
-		matrix = new char[key][col];
+		keyCheck();
+		inputCheck(); //calls method to to check if text is from file or user
+		matrix = new char[key][col];// we create a matrix of a of row *col size
 	}
-
-	private String encryptText(String s, int key) {
-		return null;
-
-	/*public static void encryptFile(String str, int rails) {
-	 
-	 //this should call on char array created in fileHandler
+	
+	
+	private void inputCheck() { //Insert method to check Input - is it file or user text?
+		
+	}
+	
+	private void keyCheck() { //checks to see if key and offset have entered
+		 /*
+		 * This Exception throw an error if the key length is outside the range stated
+		 * but the MIN_KEY and MAX_KEY variable up top. The method that calls the
+		 * Exception must also must throw the exception method.
+		
+		private void validateKey(String key) throws Exception {
+			//checkBounds(key);
+			if (key == null || key.length() < MIN_KEY_LENGHT || key.length() > MAX_KEY_LENGHT) {
+				throw new Exception("[ERROR} Invalid Cipher Key. Key Lenght must be in the range [" + MIN_KEY_LENGHT
+						+ "....." + MAX_KEY_LENGHT + "]");
+		*/
+	
+	}
+	
+	private void encryptText() {
+		//this should call on char array created in fileHandler
 
 		boolean checkdown = false; // check whether it is moving downward or upward
-		int j = 0;
-		int row = rails; // no of row is the no of rails entered by user
-		int col = str.length(); // column length is the size of string
-		char[][] a = new char[row][col];
-		// we create a matrix of a of row *col size
+		int j = 0; //was set to 0
+		int row = key; // no of row is the no of rail( entered by user
+		int col = c.length(); // column length is the size of char array
+		//char[][] matrix = new char[row][col]; //should call matrix
 
-		for (int i = 0; i < col; i++) { // matrix visitin in rails order and putting the character of plaintext
+
+		for (int row = 0; row < col; row++) { // matrix visitin in rails order and putting the character of plaintext
 
 			if (j == 0 || j == row - 1)
 				checkdown = !checkdown;
-			a[j][i] = str.charAt(i);
+			a[j][row] = c.charAt(row);
 			if (checkdown) {
 
 				j++;
@@ -57,7 +76,7 @@ public class RailFence {
 	// filewrite shout create encrypted file here.
 
 //*******Taken from : https://ghimireshankarpost.blogspot.com/2017/04/rail-fence-cipher-java-implementation.html****
-*/
+
 	}
 
 	private String decryptText(String , int key) {

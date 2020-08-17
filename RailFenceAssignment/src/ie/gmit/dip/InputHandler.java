@@ -1,15 +1,16 @@
 package ie.gmit.dip;
 
-import java.util.Scanner;
-
 public class InputHandler {
+	private String userText;
+	public boolean hasUserText = false;
 
-	public void textInput() {
-		System.out.println("Enter the plaintext for encryption");
-		Scanner inn = new Scanner(System.in);
-		String plaintext=inn.next();
-
-		//encryption(plaintext,rails);
+	public String getUserText() {
+		return userText;
 	}
-	
+
+	public void setUserText(String userText) {
+		this.userText = userText;
+		hasUserText = true;
+	}
+
 }
