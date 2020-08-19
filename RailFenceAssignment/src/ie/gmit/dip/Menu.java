@@ -36,6 +36,10 @@ public class Menu {
 
 	private void textInput() { //takes text directly from user for encryption
 			System.out.println("Enter the plaintext for encryption");
+		
+			//PADDY
+			//Should probably reuse the scanner object 's' (line 7) as opposed to creating a new one each time
+			
 			Scanner inn = new Scanner(System.in);
 			userText = inn.next();
 		return;
@@ -44,6 +48,8 @@ public class Menu {
 	private void selectFile() {
 		System.out.println("Choose File or URL");
 		System.out.println("Enter the plaintext for encryption");
+		//PADDY
+		//Should probably reuse the scanner object 's' (line 7) as opposed to creating a new one each time
 		Scanner fname = new Scanner(System.in);
 		//BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(new File(s.next()))));
 	
