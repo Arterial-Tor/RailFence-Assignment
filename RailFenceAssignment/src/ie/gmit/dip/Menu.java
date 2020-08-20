@@ -7,12 +7,13 @@ public class Menu {
 	private Scanner s;
 	private boolean keepRunning = true; //Keeps the menu visible until user decides to close application
 	private KeyHandler keyHolder; // Creates variable keyHolder as an object of the keyHandler class
-	private InputHandler userText; // Creates variable userText as an object of the InputHanlder class
-	
+	private InputHandler userText;
+	private char [] textToBeEncrypted;// Creates variable userText as an object of the InputHanlder class
 	
 	public Menu() { // constructor to initialise s
 		s = new Scanner(System.in); // Initialises new scanner as which can be called throughout the menu
 		keyHolder = new KeyHandler(); // initialises new instance of keyHanlder
+		
 	}
 
 	public void start() { // method that take inputs from user
@@ -36,15 +37,19 @@ public class Menu {
 
 	private void textInput() { //takes text directly from user for encryption
 			System.out.println("Enter the plaintext for encryption");
-			Scanner inn = new Scanner(System.in);
-			userText = inn.next();
+			userText.setUserText(s.next());
+			
 		return;
 	}
 
-	private void selectFile() {
+	private void selectFile() { //asks user to input file/url to pass to the filehandler class for later use by Railfence
 		System.out.println("Choose File or URL");
-		System.out.println("Enter the plaintext for encryption");
-		Scanner fname = new Scanner(System.in);
+		System.out.println("Enter the filepath or URL for encryption/decryption");
+		FileHandler fH = new FileHandler();
+		fH.getArrayFromFile(s.next());
+		
+		
+		//Scanner fname = new Scanner(System.in);
 		//BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(new File(s.next()))));
 	
 		//String plainText = s.next(System.in);
@@ -58,16 +63,24 @@ public class Menu {
 		
 		return;
 	}
+	
+	private void encrypt() {
+		System.out.println("Encrypted!");
+		// call railfence with encyrption test set to false
+		RailFence rf;
+		rf = new RailFence();
+			
+		return;
+	}
 
 	private void decrypt() {
 		System.out.println("Decrypted!");
+		// call railfence with encyrption test set to true\
+		//rf = new RailFence();
+		
 		return;
 	}
 
-	private void encrypt() {
-		System.out.println("Encrypted!");
-		return;
-	}
 
 	private void enterKey() {
 		/*
@@ -75,11 +88,11 @@ public class Menu {
 		 * assignment them to the private key & offset variables in the KeyHandler Class
 		 */
 		System.out.println("******** Please Enter RailFence Key! ********");
-		keyHolder.setKey(Integer.parseInt(s.next()));
+		keyHolder.setKey(Integer.parseInt(s.next())); //tell the railfence how many rows there should be
 
 		System.out.println("******** Please Enter RailFence Offset! ********");
-		keyHolder.setOffset(Integer.parseInt(s.next()));
-		
+		keyHolder.setOffset(Integer.parseInt(s.next())); //tells the railfence which row to start encryption
+		//offset can't be bigger than Key
 		//call validateKey()
 		
 		return;

@@ -2,7 +2,6 @@ package ie.gmit.dip;
 
 public class InputHandler {
 	private String userText;
-	public boolean hasUserText = false;
 
 	public String getUserText() {
 		return userText;
@@ -10,7 +9,11 @@ public class InputHandler {
 
 	public void setUserText(String userText) {
 		this.userText = userText;
-		hasUserText = true;
 	}
 
+	public char[] getCharArrayFromInput() {
+			userText.toCharArray();
+		return userText.toCharArray();
+
+	}
 }

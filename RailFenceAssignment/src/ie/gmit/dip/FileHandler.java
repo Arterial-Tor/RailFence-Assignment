@@ -3,13 +3,27 @@ package ie.gmit.dip;
 import java.io.*;
 
 public class FileHandler {
-	private String fileName;
+	//private String fileName;
+	//private void BufferedReader;
 	
 	//should create a char array with text to be encrypted
 	
 	
-	FileWriter fw = new FileWriter(new File( fileName + " " + "Encrypted.txt"));
-
+	public FileHandler() {
+		
+	}
+	
+	public char [] getArrayFromFile(String fName) {
+		BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(new File(fName))));
+		String fileContents; 
+		
+		while ((fileContents = br.readLine()) != null);
+			
+	
+	}
+	
+	//FileWriter fw = new FileWriter(new File( fileName + " " + "Encrypted.txt"));
+	
 	//BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(new File("./in.txt"))));
 	//String line = null
 }

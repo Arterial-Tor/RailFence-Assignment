@@ -4,12 +4,12 @@ public class KeyHandler {
 	//public static final int MIN_KEY_LENGHT = 1;
 	//public static final int MAX_KEY_LENGHT = 100; // do i need an offset min/max?
 	private int key;
-	private int offset;
+	private int offset;//offset can't be larger than key
 	// Two new variable created to hold the RailFence key and offset.
 
 	public int getKey() {
 		return this.key; // getKey will allow other class method to access the newly assigned private key
-							// variable.
+						// variable.
 	}
 
 	public void setKey(int key) {
@@ -33,7 +33,7 @@ public class KeyHandler {
 	 * Exception must also must throw the exception method.
 	
 	private void validateKey(String key) throws Exception {
-		if (key == 0 || key.length() > MAX_KEY_LENGHT) {
+		if (key <= 2 || key.length() > MAX_KEY_LENGHT) {
 			throw new Exception("[ERROR} Invalid Cipher Key. Key Lenght must be in the range [" + MIN_KEY_LENGHT
 					+ "....." + MAX_KEY_LENGHT + "]");
 	*/
