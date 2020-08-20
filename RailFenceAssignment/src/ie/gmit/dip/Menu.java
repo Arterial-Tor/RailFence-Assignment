@@ -38,7 +38,7 @@ public class Menu {
 	private void textInput() { //takes text directly from user for encryption
 			System.out.println("Enter the plaintext for encryption");
 			userText.setUserText(s.next());
-			
+
 		return;
 	}
 
@@ -49,7 +49,6 @@ public class Menu {
 		fH.getArrayFromFile(s.next());
 		
 		
-		//Scanner fname = new Scanner(System.in);
 		//BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(new File(s.next()))));
 	
 		//String plainText = s.next(System.in);
