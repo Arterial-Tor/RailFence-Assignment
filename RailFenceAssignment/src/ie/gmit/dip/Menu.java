@@ -8,7 +8,7 @@ public class Menu {
 	private boolean keepRunning = true; //Keeps the menu visible until user decides to close application
 	private KeyHandler keyHolder; // Creates variable keyHolder as an object of the keyHandler class
 	private InputHandler userText;
-	private char [] textToBeEncrypted;// Creates variable userText as an object of the InputHanlder class
+	private char [] textToBeEncrypted;// Create a Char array to hold text to be encrypted. Either taken from user or file
 	
 	public Menu() { // constructor to initialise s
 		s = new Scanner(System.in); // Initialises new scanner as which can be called throughout the menu
@@ -16,12 +16,11 @@ public class Menu {
 		
 	}
 
-	public void start() { // method that take inputs from user
+	public void start() throws IOException { // method that take inputs from user
 		while (keepRunning) {
 			showMenu(); // calls showOptions method to display menu
-			int userchoice = Integer.parseInt(s.next()); // blocking method, it waits until an input is passed in
 
-			switch (userchoice) {
+			switch (Integer.parseInt(s.next())) {// blocking method, it waits until an input is passed in
 			case 1 -> selectFile();
 			case 2 -> textInput();
 			case 3 -> enterKey();
@@ -42,7 +41,7 @@ public class Menu {
 		return;
 	}
 
-	private void selectFile() { //asks user to input file/url to pass to the filehandler class for later use by Railfence
+	private void selectFile() throws IOException { //asks user to input file/url to pass to the filehandler class for later use by Railfence
 		System.out.println("Choose File or URL");
 		System.out.println("Enter the filepath or URL for encryption/decryption");
 		FileHandler fH = new FileHandler();
@@ -58,7 +57,8 @@ public class Menu {
 
 	private void displayRailFence() {
 		System.out.println("railfence displayed");
-		//printArray();
+		//printArray(); 
+		//Only has to print out the last line of txt entered into the Array
 		
 		return;
 	}

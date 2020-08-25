@@ -20,17 +20,17 @@ public class RailFence {
 
 	
 	private void encryptText(int key, int offset, char [] textToBeEncrypted) {
-		int col = textToBeEncrypted.length;  // column length is the size of char array
+		int col = textToBeEncrypted.length;  // column length is the size of char array. 
 		matrix = new char[key][col];// we create a matrix of a of row *col size
-		
-
-		//this should call on char array created in fileHandler
+	
 
 		boolean checkdown = false; // check whether it is moving downward or upward
 		int row = key; // no of row is the same a the key entered by user
+		
+		// CONOR - do we have an issue here with Row = key? Specifically when we are assigning it to offset in the for loop?
 
 
-		for (row = offset; row < col; row++) { // matrix visitin in rails order and putting the character of plaintext
+		for (row = offset; row < col; row++) { // matrix visiting in rails order and putting the character of plaintext
 
 			if (offset == 0 || offset == row - 1)
 				checkdown = !checkdown;
@@ -49,18 +49,18 @@ public class RailFence {
 			}
 			System.out.println();
 		}
-		String en = "";
+		String encryptedText = "";
 
 		System.out.println("----------------------");
 		for (int i = 0; i < row; i++) {
 			for (int k = 0; k < col; k++) {
 				if (a[i][k] != 0)
-					en = en + a[i][k];
+					encryptedText = encryptedText + a[i][k];
 
 			}
 
 		}
-		System.out.println(en);
+		System.out.println(encryptedText);
 	}
 		//System.out.println(en);// printing the ciphertext
 		
