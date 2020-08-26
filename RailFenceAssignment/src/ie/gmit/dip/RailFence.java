@@ -27,8 +27,12 @@ public class RailFence {
 		boolean checkdown = false; // check whether it is moving downward or upward
 		int row = key; // no of row is the same a the key entered by user
 		
-		// CONOR - do we have an issue here with Row = key? Specifically when we are assigning it to offset in the for loop?
-
+		//CONOR - do we have an issue here with Row = key? Specifically when we are assigning it to offset in the for loop?
+		
+		//PADDY - We do indeed, no point in setting row=key because on the next line we are overwriting the value in row
+		// and replacing it with offset
+		//I think row = offset is correct as it should start on the offset
+		//Need to finalise the logic behind the cipher before going any further
 
 		for (row = offset; row < col; row++) { // matrix visiting in rails order and putting the character of plaintext
 
