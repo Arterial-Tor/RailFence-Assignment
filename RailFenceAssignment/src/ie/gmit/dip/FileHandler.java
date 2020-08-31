@@ -16,12 +16,12 @@ public class FileHandler {
 
 		while ((fileContents = br.readLine()) != null);
 
-		char[] textToBeEncrypted = new char[fileContents.length()]; // CONOR - not sure how to assign array size. I feel
+		char[] textToRailFence = new char[fileContents.length()]; // CONOR - not sure how to assign array size. I feel
 																	// like im making the array the size of the first
 																	// line
-		textToBeEncrypted = fileContents.toCharArray(); // CONOR - a bit stuck here. Is this correct?
+		textToRailFence = fileContents.toCharArray(); // CONOR - a bit stuck here. Is this correct?
 
-		return textToBeEncrypted;
+		return textToRailFence; //Change this Variable from textToBeEncrypted to textToRailFence
 
 		// br.close(); // closes the buffer reader and releases system resource back to
 		// program
