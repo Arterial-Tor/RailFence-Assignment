@@ -2,7 +2,6 @@ package ie.gmit.dip;
 
 public class RailFence {
 	private char[][] matrix = null;
-	private int offset;
 
 	// private void keyCheck() { //checks to see if key and offset have been entered
 	// and are correct
@@ -17,20 +16,24 @@ public class RailFence {
 	 * Exception("[ERROR} Invalid Cipher Key. Key Length must be in the range [" +
 	 * MIN_KEY_LENGHT + "....." + MAX_KEY_LENGHT + "]");
 	 */
+	
 
-	public void encryptText(int key, int offset, char[] textToRailFence) { //changed Charr array name from TextToBeEncrypted.
-		int col = textToRailFence.length; // column length is the size of char array.
-		matrix = new char[key][col];// we create a matrix of a of col * row size
+	public String encryptText(int key, int offset, char[] TextToBeEncrypted) { // changed Charr array name from
+																			// TextToBeEncrypted.
+		int col = TextToBeEncrypted.length - 1;// column length is the size of char array.
+	
+		matrix = new char[col][key];// we create a matrix of a of col * row size
 
 		boolean checkDown = false; // check whether it is moving downward or upward, True = Downwards, False =
 									// Upwards
-
+		try {
+			
 		for (int i = 0; i < col; i++) { // matrix visiting row in order to put the character of plaintext in
 
 			if (offset == 0 || offset == key - 1)
 				checkDown = !checkDown;
 
-			matrix[offset][i] = textToRailFence[i];
+			matrix[i][offset] = TextToBeEncrypted[i];
 
 			if (checkDown) {
 
@@ -38,10 +41,17 @@ public class RailFence {
 			} else
 				offset--;
 		}
-
+		
+		}
+		
+		catch(Exception e) { 
+			int x = 0;
+		}
+		
+		
 		// visiting the matrix in usual order to get ciphertext
 		for (int i = 0; i < col; i++) {
-			for (int k = 0; k < col; k++) {
+			for (int k = 0; k < offset; k++) {
 				System.out.print(matrix[i][k] + "  ");
 			}
 			System.out.println();
@@ -57,9 +67,8 @@ public class RailFence {
 			}
 
 		}
-		System.out.println(encryptedText);
+		return encryptedText;
 	}
-	// filewrite should create encrypted file here.
 
 //*******Taken from : https://ghimireshankarpost.blogspot.com/2017/04/rail-fence-cipher-java-implementation.html****
 
@@ -71,12 +80,12 @@ public class RailFence {
 	 * without a 2D array using this equivalence.
 	 */
 
-	public void decryptText(int key, char[] textToBeEncrypted) { // textToBeEncrypted in as a place holdeer?
+	public void decryptText(int key, char[] textToBeDecrypted) { // textToBeEncrypted in as a place holdeer?
 
 		boolean checkdown = false;
 		int j = 0;
 		int row = key;
-		int col = textToBeEncrypted.length;
+		int col = textToBeDecrypted.length;
 		matrix = new char[key][col];// we create a matrix of a of col * row size
 
 		// first of all mark the rails position by * in the matrix
@@ -100,9 +109,9 @@ public class RailFence {
 
 			for (int k = 0; k < col; k++) {
 
-				if (matrix[i][k] == '*' && index < textToBeEncrypted.length) { // hashes the the character withing the
+				if (matrix[i][k] == '*' && index < textToBeDecrypted.length) { // hashes the the character withing the
 																				// rail fence to hide them
-					matrix[i][k] = textToBeEncrypted[index++]; // Error here dus to .charAt
+					matrix[i][k] = textToBeDecrypted[index++]; // Error here dus to .charAt
 				}
 			}
 		}
@@ -128,14 +137,10 @@ public class RailFence {
 				else
 					j--;
 			}
+			
+			System.out.println(s);// print the plaintext that was decrypted by rail fence
+				// filewriter should created decrypted file here }
 		}
 	}
 
-	System.out.print(s);// print the plaintext that was decrypted by rail fence
-	cipher // filewriter should created decrypted file here }
-
-	public String setKey(String key) {
-		return null;
-
-	}
 }

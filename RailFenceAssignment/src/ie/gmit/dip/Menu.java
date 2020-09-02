@@ -7,13 +7,12 @@ public class Menu {
 	private Scanner s;
 	private boolean keepRunning = true; // Keeps the menu visible until user decides to close application
 	private KeyHandler keyHolder; // Creates variable keyHolder as an object of the keyHandler class
-	private InputHandler userText;
-	private char[] textToRailfence;// Create a Char array to hold text to be encrypted. Either taken from user or
-										// file
+	private InputHandler inputHandler;
 
 	public Menu() { // constructor to initialise s
 		s = new Scanner(System.in); // Initialises new scanner as which can be called throughout the menu
 		keyHolder = new KeyHandler(); // initialises new instance of keyHanlder
+		inputHandler = new InputHandler();
 
 	}
 
@@ -37,10 +36,8 @@ public class Menu {
 
 	private void textInput() { // takes text directly from user for encryption
 		System.out.println("Enter the plaintext for encryption");
-		InputHandler iH = new InputHandler();
-		iH.getCharArrayFromInput(userText.setUserText(s.next())); //Stuck here CONOR Heads Melted! 
-		textToRailfence = new char [iH];  //im trying to take the Array we creat in Input handler into this priate char array so i can pass it to the encryption method
-		
+		inputHandler.setUserText(s.next()); // Stuck here CONOR Heads Melted!
+
 		return;
 	}
 
@@ -67,12 +64,16 @@ public class Menu {
 		return;
 	}
 
-	private void encrypt() {
-		System.out.println("Encrypted!");
+	private void encrypt() throws IOException {
 		// call railfence with encyrption test set to false
-		RailFence rf;
-		rf = new RailFence();
-		rf.encryptText(keyHolder.getKey(), keyHolder.getOffset(), textToRailfence);
+		RailFence rf = new RailFence();
+		String encryptedText = rf.encryptText(keyHolder.getKey(), keyHolder.getOffset(),
+				inputHandler.getCharArrayFromInput());
+		FileHandler fH = new FileHandler();
+		System.out.println("Enter the file output name");
+		String fOutName = s.next();
+		fH.writeToFile(encryptedText, fOutName);
+
 		return;
 	}
 
@@ -91,13 +92,18 @@ public class Menu {
 		 * keyHolder variable calls setKey and setOffset to take the users input and
 		 * assignment them to the private key & offset variables in the KeyHandler Class
 		 */
-		System.out.println("******** Please Enter RailFence Key! ********");
-		keyHolder.setKey(Integer.parseInt(s.next())); // tell the railfence how many rows there should be
+		do {
+			System.out.println("******** Please Enter RailFence Key! ********");
+			System.out.println("Key Lenght must be in the range greater than 0");
+			keyHolder.setKey(Integer.parseInt(s.next())); // tell the railfence how many rows there should be
+		} while (keyHolder.getKey() < 1);
 
-		System.out.println("******** Please Enter RailFence Offset! ********");
-		keyHolder.setOffset(Integer.parseInt(s.next())); // tells the railfence which row to start encryption
-		// offset can't be bigger than Key
-		// call validateKey()
+		do {
+
+			System.out.println("******** Please Enter RailFence Offset! ********");
+			System.out.println("Offset Lenght must be in the range greater than the key");
+			keyHolder.setOffset(Integer.parseInt(s.next())); // tells the railfence which row to start encryption
+		} while (keyHolder.getOffset() >= keyHolder.getKey());
 
 		return;
 	}
