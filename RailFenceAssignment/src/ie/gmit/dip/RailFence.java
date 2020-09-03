@@ -103,6 +103,30 @@ public class RailFence {
 		return decryptedText;
 	}
 
+	public char [] [] printRailFence(int key, int offset, char[] TextToBeEncrypted) { // changed Charr array name from
+		// TextToBeEncrypted.
+		int col = TextToBeEncrypted.length - 1;// column length is the size of char array.
+
+		matrix = new char[key][col];// we create a matrix of a of col * row size
+
+		boolean checkDown = false; // check whether it is moving downward or upward, True = Downwards, False =
+									// Upwards
+
+		for (int i = 0; i < col - 1; i++) { // matrix visiting row in order to put the character of plaintext in
+
+			if (offset == 0 || offset == key - 1)
+				checkDown = !checkDown;
+
+			matrix[offset][i] = TextToBeEncrypted[i];
+
+			if (checkDown) {
+
+				offset++;
+			} else
+				offset--;
+		}
+		return matrix;
+	}
 }
 
 //*******Encryption and decryption methods originally taken from : https://ghimireshankarpost.blogspot.com/2017/04/rail-fence-cipher-java-implementation.html****

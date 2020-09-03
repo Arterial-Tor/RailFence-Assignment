@@ -25,9 +25,9 @@ public class FileHandler {
 		stringBuilder.deleteCharAt(stringBuilder.length() - 1);
 		br.close();// closes the buffer reader and releases system resource back to
 		// program
-		String contentString = stringBuilder.toString();
+		//String contentString = stringBuilder.toString();
 
-		inputHandler.setUserText(contentString);
+		inputHandler.setUserText(stringBuilder.toString());
 
 	}
 

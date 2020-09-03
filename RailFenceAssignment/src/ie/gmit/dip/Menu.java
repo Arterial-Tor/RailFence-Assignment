@@ -55,10 +55,10 @@ public class Menu {
 
 	private void displayRailFence() {
 		System.out.println("railfence displayed");
-		// printArray();
-		// Only has to print out the last line of txt entered into the Array
-
-		return;
+		RailFence rf = new RailFence();
+		System.out.println("****** Enter the file output name ******");
+		System.out.println(rf.printRailFence(keyHolder.getKey(), keyHolder.getOffset(),
+				inputHandler.getCharArrayFromInput()));/
 	}
 
 	private void encrypt() throws IOException {
