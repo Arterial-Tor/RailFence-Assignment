@@ -28,30 +28,27 @@ public class Menu {
 			case 5 -> decrypt();
 			case 6 -> displayRailFence();
 			case 7 -> quit();
-			default -> System.out.println("[ERROR] Invalid Input!");
+			default -> System.out.println("****** [ERROR] Invalid Input! ******");
 			// default ensure any value outside 1-7 is displayed to the user as invalid
 			}
 		}
 	}
 
 	private void textInput() { // takes text directly from user for encryption
-		System.out.println("Enter the plaintext for encryption");
+		System.out.println("****** Enter the plaintext for encryption ******");
 		inputHandler.setUserText(s.next()); // Stuck here CONOR Heads Melted!
 
 		return;
 	}
 
-	private void selectFile() throws IOException { // asks user to input file/url to pass to the filehandler class for
-													// later use by Railfence
-		System.out.println("Choose File or URL");
+	private void selectFile() throws IOException {
+		System.out.println("*************** Choose File or URL ****************");
 		System.out.println("Enter the filepath or URL for encryption/decryption");
 		FileHandler fH = new FileHandler();
 		fH.getArrayFromFile(s.next());
 
-		// BufferedReader br = new BufferedReader(new InputStreamReader(new
-		// FileInputStream(new File(s.next()))));
-
-		// String plainText = s.next(System.in);
+		// asks user to input file/url to pass to the filehandler class for
+		// later use by Railfence
 
 		return;
 	}
@@ -65,24 +62,25 @@ public class Menu {
 	}
 
 	private void encrypt() throws IOException {
-		// call railfence with encyrption test set to false
 		RailFence rf = new RailFence();
-		String encryptedText = rf.encryptText(keyHolder.getKey(), keyHolder.getOffset(),
+		String encryptText = rf.encryptText(keyHolder.getKey(), keyHolder.getOffset(),
 				inputHandler.getCharArrayFromInput());
 		FileHandler fH = new FileHandler();
-		System.out.println("Enter the file output name");
+		System.out.println("****** Enter the file output name ******");
 		String fOutName = s.next();
-		fH.writeToFile(encryptedText, fOutName);
+		fH.writeToFile(encryptText, fOutName);
 
 		return;
 	}
 
-	private void decrypt() {
-		System.out.println("Decrypted!");
-		// call railfence with encyrption test set to true\
-		RailFence rf;
-		rf = new RailFence();
-		rf.decryptText(keyHolder.getKey(), textToRailfence);
+	private void decrypt() throws IOException {
+
+		RailFence rf = new RailFence();
+		String decryptText = rf.decryptText(keyHolder.getKey(), inputHandler.getCharArrayFromInput());
+		FileHandler fH = new FileHandler();
+		System.out.println("****** Enter the file output name ******");
+		String fOutName = s.next();
+		fH.writeToFile(decryptText, fOutName);
 
 		return;
 	}
@@ -129,8 +127,3 @@ public class Menu {
 
 	}
 }
-/*
- * the menu output was put down here to clean up the start method. that way the
- * start method only deals with taking in inputs. the showOptions method deals
- * with printing out the menu.
- */

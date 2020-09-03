@@ -12,7 +12,7 @@ public class InputHandler {
 	}
 
 	public char[] getCharArrayFromInput() {
-			userText.toCharArray();
+		userText.toCharArray();
 		return userText.toCharArray();
 
 	}

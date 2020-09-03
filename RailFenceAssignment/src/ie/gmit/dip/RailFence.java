@@ -3,37 +3,21 @@ package ie.gmit.dip;
 public class RailFence {
 	private char[][] matrix = null;
 
-	// private void keyCheck() { //checks to see if key and offset have been entered
-	// and are correct
-	/*
-	 * This Exception throw an error if the key length is outside the range stated
-	 * but the MIN_KEY and MAX_KEY variable up top. The method that calls the
-	 * Exception must also must throw the exception method.
-	 * 
-	 * private void validateKey(String key) throws Exception { //checkBounds(key);
-	 * if (key == null || key.length() < MIN_KEY_LENGHT || key.length() >
-	 * MAX_KEY_LENGHT) { throw new
-	 * Exception("[ERROR} Invalid Cipher Key. Key Length must be in the range [" +
-	 * MIN_KEY_LENGHT + "....." + MAX_KEY_LENGHT + "]");
-	 */
-	
-
 	public String encryptText(int key, int offset, char[] TextToBeEncrypted) { // changed Charr array name from
-																			// TextToBeEncrypted.
+																				// TextToBeEncrypted.
 		int col = TextToBeEncrypted.length - 1;// column length is the size of char array.
-	
-		matrix = new char[col][key];// we create a matrix of a of col * row size
+
+		matrix = new char[key][col];// we create a matrix of a of col * row size
 
 		boolean checkDown = false; // check whether it is moving downward or upward, True = Downwards, False =
 									// Upwards
-		try {
-			
-		for (int i = 0; i < col; i++) { // matrix visiting row in order to put the character of plaintext in
+
+		for (int i = 0; i < col - 1; i++) { // matrix visiting row in order to put the character of plaintext in
 
 			if (offset == 0 || offset == key - 1)
 				checkDown = !checkDown;
 
-			matrix[i][offset] = TextToBeEncrypted[i];
+			matrix[offset][i] = TextToBeEncrypted[i];
 
 			if (checkDown) {
 
@@ -41,106 +25,85 @@ public class RailFence {
 			} else
 				offset--;
 		}
-		
-		}
-		
-		catch(Exception e) { 
-			int x = 0;
-		}
-		
-		
+
 		// visiting the matrix in usual order to get ciphertext
-		for (int i = 0; i < col; i++) {
-			for (int k = 0; k < offset; k++) {
-				System.out.print(matrix[i][k] + "  ");
-			}
-			System.out.println();
-		}
+		/*
+		 * for (int i = 0; i < key; i++) { for (int k = 0; k < col; k++) {
+		 * System.out.print(matrix[i][k] + "  "); } System.out.println(); }
+		 */
 		String encryptedText = "";
 
 		System.out.println("----------------------");
-		for (int i = 0; i < col; i++) {
-			for (int k = 0; k < key; k++) {
+		for (int i = 0; i < key; i++) {
+			for (int k = 0; k < col; k++) {
 				if (matrix[i][k] != 0)
 					encryptedText = encryptedText + matrix[i][k];
-
 			}
 
 		}
 		return encryptedText;
 	}
 
-//*******Taken from : https://ghimireshankarpost.blogspot.com/2017/04/rail-fence-cipher-java-implementation.html****
+	public String decryptText(int key, char[] textToBeDecrypted) { // textToBeEncrypted in as a place holdeer?
 
-	/*
-	 * private String decryptText(String , int key) { return null; /* Note that the
-	 * distance between the characters on each row can be computed as d = 2 * (k –
-	 * row) – 2, where k is the size of the key and row is the array index of a row
-	 * in the range [0…k – 1]. It is possible to implement the Rail Fence cipher
-	 * without a 2D array using this equivalence.
-	 */
-
-	public void decryptText(int key, char[] textToBeDecrypted) { // textToBeEncrypted in as a place holdeer?
-
-		boolean checkdown = false;
-		int j = 0;
-		int row = key;
+		boolean checkDown = false;
+		int row = 0;
 		int col = textToBeDecrypted.length;
 		matrix = new char[key][col];// we create a matrix of a of col * row size
 
 		// first of all mark the rails position by * in the matrix
 		for (int i = 0; i < col; i++) {
-			if (j == 0 || j == row - 1)
-				checkdown = !checkdown;
+			if (row == 0 || row == key - 1)
+				checkDown = !checkDown;
 
-			matrix[j][i] = '*'; // hashes the the character withing the rail fence to hide them
+			matrix[row][i] = '*'; // hashes the the character within the rail fence to hide them
 
-			if (checkdown)
-				j++;
+			if (checkDown)
+				row++;
 			else
-				j--;
+				row--;
 		}
 
-		// now the methods enters the character of cipheetext in the matrix positon that
+		// now the methods enters the character of ciphertext in the matrix position
+		// that
 		// have *
-		int index = 0; // will count out the number of the encyrpted txt
+		int index = 0; // will count out the number of the encrypted txt
 
-		for (int i = 0; i < row; i++) {
+		for (int i = 0; i < key; i++) {
 
 			for (int k = 0; k < col; k++) {
 
-				if (matrix[i][k] == '*' && index < textToBeDecrypted.length) { // hashes the the character withing the
-																				// rail fence to hide them
-					matrix[i][k] = textToBeDecrypted[index++]; // Error here dus to .charAt
+				if (matrix[i][k] == '*' && index < col) {
+					matrix[i][k] = textToBeDecrypted[index++];
 				}
 			}
 		}
 
 		// visit each character in rails order as character are put in the encryption
-		// function for (int i = 0; i < row; i++) { for (int k = 0; k < col; k++) {
-		System.out.print(matrix[i][k] + "\t");
-		System.out.println();
+		// function
 
-		checkdown = false;
+		String decryptedText = "";
 
-		String s = "";
-		j = 0;
+		checkDown = false; // reset checkDown
+		row = 0; // reset row to 0
+		for (int i = 0; i < col - 1; i++) { // matrix visiting row in order to put the character of ciphertext in
 
-		for (int i = 0; i < col; i++) {
-			if (j == 0 || j == row - 1) {
-				checkdown = !checkdown;
+			if (row == 0 || row == key - 1)
+				checkDown = !checkDown;
 
-				s += matrix[j][i];
+			decryptedText += matrix[row][i]; // adds each letter to the string decryptedText
 
-				if (checkdown)
-					j++;
-				else
-					j--;
-			}
-			
-			System.out.println(s);// print the plaintext that was decrypted by rail fence
-				// filewriter should created decrypted file here }
+			if (checkDown) {
+
+				row++;
+			} else
+				row--;
 		}
+
+		return decryptedText;
 	}
 
 }
+
+//*******Encryption and decryption methods originally taken from : https://ghimireshankarpost.blogspot.com/2017/04/rail-fence-cipher-java-implementation.html****
+// modified accordingly
