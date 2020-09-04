@@ -45,7 +45,13 @@ public class Menu {
 		System.out.println("*************** Choose File or URL ****************");
 		System.out.println("Enter the filepath or URL for encryption/decryption");
 		FileHandler fH = new FileHandler();
+		
+		//we need to consume a string return here after updating the Filehandler class
+		//String fileText = fH.getArrayFromFile(s.next());
 		fH.getArrayFromFile(s.next());
+		
+		//Then we user this classes inputHandler object
+		//inputHandler.setUserText(fileText);
 
 		// asks user to input file/url to pass to the filehandler class for
 		// later use by Railfence
