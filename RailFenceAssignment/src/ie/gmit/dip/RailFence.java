@@ -26,7 +26,6 @@ public class RailFence {
 				offset--;
 		}
 
-
 		String encryptedText = "";
 
 		System.out.println("----------Encrypting Text------------");
@@ -42,7 +41,7 @@ public class RailFence {
 		return encryptedText;
 	}
 
-	public String decryptText(int key,int offset, char[] textToBeDecrypted) { // textToBeEncrypted in as a place holdeer?
+	public String decryptText(int key, int offset, char[] textToBeDecrypted) {
 
 		boolean checkDown = false;
 		int rowOffset = offset;
@@ -84,7 +83,7 @@ public class RailFence {
 		System.out.println("----------Decrypting Text------------");
 		System.out.println();
 		System.out.println("----------Please Wait....------------");
-		
+
 		checkDown = false; // reset checkDown
 		rowOffset = offset; // reset rowOffset to offset value
 		for (int i = 0; i < col - 1; i++) { // matrix visiting row in order to put the character of ciphertext in
@@ -104,31 +103,6 @@ public class RailFence {
 		return decryptedText;
 	}
 
-	public char [] [] printRailFence(int key, int offset, char[] TextToBeEncrypted) { // changed Charr array name from
-		// TextToBeEncrypted.
-		char [] [] printArray;
-		int col = TextToBeEncrypted.length - 1;// column length is the size of char array.
-
-		printArray = new char[key][col];// we create a matrix of a of col * row size
-
-		boolean checkDown = false; // check whether it is moving downward or upward, True = Downwards, False =
-									// Upwards
-
-		for (int i = 0; i < col - 1; i++) { // matrix visiting row in order to put the character of plaintext in
-
-			if (offset == 0 || offset == key - 1)
-				checkDown = !checkDown;
-
-			printArray[offset][i] = TextToBeEncrypted[i];
-
-			if (checkDown) {
-
-				offset++;
-			} else
-				offset--;
-		}
-		return printArray;
-	}
 }
 
 //*******Encryption and decryption methods originally taken from : https://ghimireshankarpost.blogspot.com/2017/04/rail-fence-cipher-java-implementation.html****

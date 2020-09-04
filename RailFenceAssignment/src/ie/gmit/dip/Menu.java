@@ -7,60 +7,51 @@ public class Menu {
 	private Scanner s;
 	private boolean keepRunning = true; // Keeps the menu visible until user decides to close application
 	private KeyHandler keyHolder; // Creates variable keyHolder as an object of the keyHandler class
-	private InputHandler inputHandler;
+	private InputHandler inputHandler; // Creates variable inputHandler as an object of the InputHandler class
 
-	public Menu() { // constructor to initialise s
-		s = new Scanner(System.in); // Initialises new scanner as which can be called throughout the menu
-		keyHolder = new KeyHandler(); // initialises new instance of keyHanlder
-		inputHandler = new InputHandler();
+	public Menu() { // constructor to initialise class variables
+		s = new Scanner(System.in); // Initialises new scanner s which can be called throughout the menu
+		keyHolder = new KeyHandler(); // initialises new instance of keyHandler
+		inputHandler = new InputHandler(); // initialises new instance of inputHandler
 
 	}
 
-	public void start() throws IOException { // method that take inputs from user
-		while (keepRunning) {
+	public void start() throws IOException { // Start() called by runner prints menu and takes input from user
+		while (keepRunning) { // This will ensure the menu stays visible to the user until the keepRunning = False
 			showMenu(); // calls showOptions method to display menu
 
-			switch (Integer.parseInt(s.next())) {// blocking method, it waits until an input is passed in
-			case 1 -> selectFile();
+			switch (Integer.parseInt(s.next())) { // Switch statement that will take user inputs from the terminal via s.next()
+			case 1 -> selectFile(); // Enter a value from 1-6 to call one of the attached methods
 			case 2 -> textInput();
 			case 3 -> enterKey();
 			case 4 -> encrypt();
 			case 5 -> decrypt();
-			case 6 -> displayRailFence();
-			case 7 -> quit();
+			case 6 -> quit();
 			default -> System.out.println("****** [ERROR] Invalid Input! ******");
-			// default ensure any value outside 1-7 is displayed to the user as invalid
+			// default ensures any value outside 1-6 is displayed to the user as invalid
 			}
 		}
 	}
 
-	private void textInput() { // takes text directly from user for encryption
+	private void textInput() { // takes text directly from entered by the user to store for encryption
 		System.out.println("****** Enter the plaintext for encryption ******");
-		inputHandler.setUserText(s.next()); // Stuck here CONOR Heads Melted!
+		inputHandler.setUserText(s.next()); //calls 
 
 		return;
 	}
 
 	private void selectFile() throws IOException {
-		System.out.println("*************** Choose File or URL ****************");
-		System.out.println("Enter the filepath or URL for encryption/decryption");
+		System.out.println("************** Choose File to import ***************");
+		System.out.println("****Enter the filepath for encryption/decryption****");
 		FileHandler fH = new FileHandler();
+
 		String fileText = fH.getArrayFromFile(s.next());
 		inputHandler.setUserText(fileText);
 
-		// asks user to input file/url to pass to the filehandler class for
+		// asks user to input file to pass to the filehandler class for
 		// later use by Railfence
 
 		return;
-	}
-
-	private void displayRailFence() {
-		System.out.println("railfence displayed");
-		RailFence rf = new RailFence();
-		char[][] displayArray = rf.printRailFence(keyHolder.getKey(), keyHolder.getOffset(),
-				inputHandler.getCharArrayFromInput());
-		System.out.println("****** Railfence ******");
-		System.out.println(displayArray);
 	}
 
 	private void encrypt() throws IOException {
@@ -79,7 +70,8 @@ public class Menu {
 	private void decrypt() throws IOException {
 
 		RailFence rf = new RailFence();
-		String decryptText = rf.decryptText(keyHolder.getKey(),keyHolder.getOffset(), inputHandler.getCharArrayFromInput());
+		String decryptText = rf.decryptText(keyHolder.getKey(), keyHolder.getOffset(),
+				inputHandler.getCharArrayFromInput());
 		FileHandler fH = new FileHandler();
 		System.out.println("************* Enter the file output name *************");
 		System.out.println("** [INFO] File type will be generated automatically **");
@@ -121,14 +113,13 @@ public class Menu {
 		System.out.println("######################################");
 		System.out.println("       File Encyrption App v1.0");
 		System.out.println("######################################");
-		System.out.println("1) Select File or URL");
+		System.out.println("1) Select File");
 		System.out.println("2) Input Plain Text");
 		System.out.println("3) Enter RailFence Key");
 		System.out.println("4) Encrypt");
 		System.out.println("5) Decrypt");
-		System.out.println("6) Display RailFence");
-		System.out.println("7) Quit");
-		System.out.println("Select an Option [1 - 7]>");
+		System.out.println("6) Quit");
+		System.out.println("Select an Option [1 - 6]>");
 
 	}
 }
