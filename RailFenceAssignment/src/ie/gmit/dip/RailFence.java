@@ -26,14 +26,12 @@ public class RailFence {
 				offset--;
 		}
 
-		// visiting the matrix in usual order to get ciphertext
-		/*
-		 * for (int i = 0; i < key; i++) { for (int k = 0; k < col; k++) {
-		 * System.out.print(matrix[i][k] + "  "); } System.out.println(); }
-		 */
+
 		String encryptedText = "";
 
-		System.out.println("----------------------");
+		System.out.println("----------Encrypting Text------------");
+		System.out.println();
+		System.out.println("----------Please Wait....------------");
 		for (int i = 0; i < key; i++) {
 			for (int k = 0; k < col; k++) {
 				if (matrix[i][k] != 0)
@@ -44,24 +42,24 @@ public class RailFence {
 		return encryptedText;
 	}
 
-	public String decryptText(int key, char[] textToBeDecrypted) { // textToBeEncrypted in as a place holdeer?
+	public String decryptText(int key,int offset, char[] textToBeDecrypted) { // textToBeEncrypted in as a place holdeer?
 
 		boolean checkDown = false;
-		int row = 0;
+		int rowOffset = offset;
 		int col = textToBeDecrypted.length;
 		matrix = new char[key][col];// we create a matrix of a of col * row size
 
 		// first of all mark the rails position by * in the matrix
 		for (int i = 0; i < col; i++) {
-			if (row == 0 || row == key - 1)
+			if (rowOffset == 0 || rowOffset == key - 1)
 				checkDown = !checkDown;
 
-			matrix[row][i] = '*'; // hashes the the character within the rail fence to hide them
+			matrix[rowOffset][i] = '*'; // hashes the the character within the rail fence to hide them
 
 			if (checkDown)
-				row++;
+				rowOffset++;
 			else
-				row--;
+				rowOffset--;
 		}
 
 		// now the methods enters the character of ciphertext in the matrix position
@@ -83,21 +81,24 @@ public class RailFence {
 		// function
 
 		String decryptedText = "";
-
+		System.out.println("----------Decrypting Text------------");
+		System.out.println();
+		System.out.println("----------Please Wait....------------");
+		
 		checkDown = false; // reset checkDown
-		row = 0; // reset row to 0
+		rowOffset = offset; // reset rowOffset to offset value
 		for (int i = 0; i < col - 1; i++) { // matrix visiting row in order to put the character of ciphertext in
 
-			if (row == 0 || row == key - 1)
+			if (rowOffset == 0 || rowOffset == key - 1)
 				checkDown = !checkDown;
 
-			decryptedText += matrix[row][i]; // adds each letter to the string decryptedText
+			decryptedText += matrix[rowOffset][i]; // adds each letter to the string decryptedText
 
 			if (checkDown) {
 
-				row++;
+				rowOffset++;
 			} else
-				row--;
+				rowOffset--;
 		}
 
 		return decryptedText;
@@ -105,9 +106,10 @@ public class RailFence {
 
 	public char [] [] printRailFence(int key, int offset, char[] TextToBeEncrypted) { // changed Charr array name from
 		// TextToBeEncrypted.
+		char [] [] printArray;
 		int col = TextToBeEncrypted.length - 1;// column length is the size of char array.
 
-		matrix = new char[key][col];// we create a matrix of a of col * row size
+		printArray = new char[key][col];// we create a matrix of a of col * row size
 
 		boolean checkDown = false; // check whether it is moving downward or upward, True = Downwards, False =
 									// Upwards
@@ -117,7 +119,7 @@ public class RailFence {
 			if (offset == 0 || offset == key - 1)
 				checkDown = !checkDown;
 
-			matrix[offset][i] = TextToBeEncrypted[i];
+			printArray[offset][i] = TextToBeEncrypted[i];
 
 			if (checkDown) {
 
@@ -125,7 +127,7 @@ public class RailFence {
 			} else
 				offset--;
 		}
-		return matrix;
+		return printArray;
 	}
 }
 

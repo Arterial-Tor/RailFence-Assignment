@@ -9,7 +9,6 @@ public class Runner {
 		try {
 			m.start();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

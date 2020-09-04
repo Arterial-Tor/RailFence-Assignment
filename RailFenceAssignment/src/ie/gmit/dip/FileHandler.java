@@ -11,7 +11,7 @@ public class FileHandler {
 		inputHandler = new InputHandler();
 	}
 
-	public void getArrayFromFile(String fName) throws IOException { // I've just thrown exception to allow me to run
+	public String getArrayFromFile(String fName) throws IOException { // I've just thrown exception to allow me to run
 																		// the programme
 		BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(new File("./" + fName))));
 		StringBuilder stringBuilder = new StringBuilder();
@@ -25,9 +25,9 @@ public class FileHandler {
 		stringBuilder.deleteCharAt(stringBuilder.length() - 1);
 		br.close();// closes the buffer reader and releases system resource back to
 		// program
-		//String contentString = stringBuilder.toString();
+		String contentString = stringBuilder.toString();
 
-		inputHandler.setUserText(stringBuilder.toString());
+		return contentString;
 
 	}
 

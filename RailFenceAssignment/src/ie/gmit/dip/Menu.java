@@ -45,7 +45,8 @@ public class Menu {
 		System.out.println("*************** Choose File or URL ****************");
 		System.out.println("Enter the filepath or URL for encryption/decryption");
 		FileHandler fH = new FileHandler();
-		fH.getArrayFromFile(s.next());
+		String fileText = fH.getArrayFromFile(s.next());
+		inputHandler.setUserText(fileText);
 
 		// asks user to input file/url to pass to the filehandler class for
 		// later use by Railfence
@@ -56,9 +57,10 @@ public class Menu {
 	private void displayRailFence() {
 		System.out.println("railfence displayed");
 		RailFence rf = new RailFence();
-		System.out.println("****** Enter the file output name ******");
-		System.out.println(rf.printRailFence(keyHolder.getKey(), keyHolder.getOffset(),
-				inputHandler.getCharArrayFromInput()));/
+		char[][] displayArray = rf.printRailFence(keyHolder.getKey(), keyHolder.getOffset(),
+				inputHandler.getCharArrayFromInput());
+		System.out.println("****** Railfence ******");
+		System.out.println(displayArray);
 	}
 
 	private void encrypt() throws IOException {
@@ -66,21 +68,24 @@ public class Menu {
 		String encryptText = rf.encryptText(keyHolder.getKey(), keyHolder.getOffset(),
 				inputHandler.getCharArrayFromInput());
 		FileHandler fH = new FileHandler();
-		System.out.println("****** Enter the file output name ******");
+		System.out.println("************* Enter the file output name *************");
+		System.out.println("** [INFO] File type will be generated automatically **");
 		String fOutName = s.next();
 		fH.writeToFile(encryptText, fOutName);
-
+		System.out.println("************* Encryption Completed *************");
 		return;
 	}
 
 	private void decrypt() throws IOException {
 
 		RailFence rf = new RailFence();
-		String decryptText = rf.decryptText(keyHolder.getKey(), inputHandler.getCharArrayFromInput());
+		String decryptText = rf.decryptText(keyHolder.getKey(),keyHolder.getOffset(), inputHandler.getCharArrayFromInput());
 		FileHandler fH = new FileHandler();
-		System.out.println("****** Enter the file output name ******");
+		System.out.println("************* Enter the file output name *************");
+		System.out.println("** [INFO] File type will be generated automatically **");
 		String fOutName = s.next();
 		fH.writeToFile(decryptText, fOutName);
+		System.out.println("************* Encryption Completed *************");
 
 		return;
 	}
