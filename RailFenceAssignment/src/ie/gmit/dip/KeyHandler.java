@@ -2,7 +2,7 @@ package ie.gmit.dip;
 
 public class KeyHandler {
 	private int key;
-	private int offset;// offset can't be larger than key
+	private int offset;
 	// Two new variable created to hold the RailFence key and offset.
 
 	public int getKey() {
