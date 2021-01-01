@@ -12,7 +12,7 @@ public class FileHandler { // FileHandler class deals with reading in files to s
 		 * SelectFile method in the menu class
 		 */
 		BufferedReader br;
-		br = new BufferedReader(new InputStreamReader(new FileInputStream(new File("./" + fName))));
+		br = new BufferedReader(new InputStreamReader(new FileInputStream(new File(fName))));
 		/*
 		 * ^file path entered by user is used to locate file and read the text lin by
 		 * line into a buffered reader br

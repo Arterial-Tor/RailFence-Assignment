@@ -126,7 +126,7 @@ public class Menu {
 	private void showMenu() { // This method that displays the menu options to the user
 		System.out.println("");
 		System.out.println("######################################");
-		System.out.println("       RailFence Encryptor 3000 v1.0");
+		System.out.println("    RailFence Encryptor 3000 v1.0");
 		System.out.println("######################################");
 		System.out.println("1) Select File");
 		System.out.println("2) Input Plain Text");
