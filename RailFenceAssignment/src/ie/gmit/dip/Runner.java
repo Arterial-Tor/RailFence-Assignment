@@ -14,7 +14,7 @@ public class Runner { //Runner class handles the main method and subsequent inti
 		}
 	}
 
-}//tester
+}
 
 
 
